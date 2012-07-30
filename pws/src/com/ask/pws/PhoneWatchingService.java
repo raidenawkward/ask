@@ -1,5 +1,6 @@
 package com.ask.pws;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Service;
@@ -8,7 +9,7 @@ import android.os.IBinder;
 
 public class PhoneWatchingService extends Service {
 
-	private List<Watcher> watchers;
+	private List<Watcher> watchers = new ArrayList<Watcher>();
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -19,13 +20,21 @@ public class PhoneWatchingService extends Service {
 	public void onCreate() {
 		super.onCreate();
 
-		startWatching();
+		addWatcher(new SimWatcher());
 	}
 
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+	}
+
+	@Override
+	public void onStart(Intent intent, int startId) {
+		// TODO Auto-generated method stub
+		super.onStart(intent, startId);
+
+		startWatching();
 	}
 
 	protected void startWatching() {
@@ -36,7 +45,9 @@ public class PhoneWatchingService extends Service {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						watcher.onWatch();
+						if (watcher.onWatch()) {
+							PhoneWatchingService.this.stopSelf();
+						}
 					}
 				}).start();
 			}

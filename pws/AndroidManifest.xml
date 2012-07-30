@@ -3,6 +3,13 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+	<uses-permission android:name="android.permission.READ_OWNER_DATA"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.WRITE_OWNER_DATA"/>
+
     <uses-sdk
         android:minSdkVersion="3"
         android:targetSdkVersion="15" />
@@ -14,13 +21,12 @@
         <receiver android:name="BootCompleteReceiver" android:exported="false" android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-                <action android:name="android.intent.action.ACTION_USER_PRESENT"></action>
             </intent-filter>
         </receiver>
-        <service android:name="PhoneWatchingService">
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
+        <service android:name=".PhoneWatchingService" android:exported="false">
+            <intent-filter>
+				<action android:name="com.ask.pws.PhoneWatchingService"></action>
+            </intent-filter>
         </service>
     </application>
-
 </manifest>
