@@ -3,7 +3,7 @@ ASK - Android Secure Kit
 
 includes the following kits:
 
-	SWS - Sim Watching Service
+	PWS - Phone Watching Service
 	SCS - SMS Commands Service
 
 
