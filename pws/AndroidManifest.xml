@@ -11,15 +11,16 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+        <receiver android:name="BootCompleteReceiver" android:exported="false" android:enabled="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.ACTION_SCREEN_ON"></action>
             </intent-filter>
-        </activity>
+        </receiver>
+        <service android:name="PhoneWatchingService">
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </service>
     </application>
 
 </manifest>
