@@ -1,11 +1,14 @@
 package com.ask.pws;
 
+import java.util.List;
+
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.widget.Toast;
 
 public class PhoneWatchingService extends Service {
+
+	private List<Watcher> watchers;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -14,15 +17,38 @@ public class PhoneWatchingService extends Service {
 
 	@Override
 	public void onCreate() {
-		// TODO Auto-generated method stub
 		super.onCreate();
-		Toast.makeText(null, "service started", Toast.LENGTH_SHORT).show();
+
+		startWatching();
 	}
 
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+	}
+
+	protected void startWatching() {
+
+		for (int i = 0; i < watchers.size(); i++) {
+			final Watcher watcher = watchers.get(i);
+			if (watcher != null) {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						watcher.onWatch();
+					}
+				}).start();
+			}
+		}
+	}
+
+	public void addWatcher(Watcher watcher) {
+		watchers.add(watcher);
+	}
+
+	public List<Watcher> getWatchers() {
+		return watchers;
 	}
 
 }

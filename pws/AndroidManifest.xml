@@ -14,7 +14,7 @@
         <receiver android:name="BootCompleteReceiver" android:exported="false" android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
-                <action android:name="android.intent.action.ACTION_SCREEN_ON"></action>
+                <action android:name="android.intent.action.ACTION_USER_PRESENT"></action>
             </intent-filter>
         </receiver>
         <service android:name="PhoneWatchingService">
