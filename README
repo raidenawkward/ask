@@ -6,5 +6,6 @@ includes the following kits:
 	PWS - Phone Watching Service
 	SCS - SMS Commands Service
 
+To prevent this app being removed from phones, move the apk from /data/app to /system/app.
 
 Any code or document in this project CANNOT be used without permission!
