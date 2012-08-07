@@ -43,7 +43,6 @@ public class PhoneWatchingService extends Service {
 			final Watcher watcher = watchers.get(i);
 			if (watcher != null) {
 				new Thread(new Runnable() {
-					@Override
 					public void run() {
 						if (watcher.onWatch()) {
 							PhoneWatchingService.this.stopSelf();

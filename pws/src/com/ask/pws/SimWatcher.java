@@ -29,7 +29,6 @@ public class SimWatcher implements Watcher {
 		targetNumbers.add(TARGET_PHONE_NUMBER);
 	}
 
-	@Override
 	public boolean onWatch() {
 		String currentSim = getCurrentSimSeries();
 		String recordSim = getSimRecord();
